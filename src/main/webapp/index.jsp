@@ -29,7 +29,7 @@
                             <a href="/blogcreate"><b>블로그등록</b></a>&nbsp;&nbsp;
                         </c:if>
                         <c:if test="${blog != null}">
-                            <a href="#"><b>내 블로그로 가기</b></a>
+                            <a href="/blogMain/${blog.blogId}"><b>내 블로그로 가기</b></a>
                         </c:if>
                     </c:if>
                 </td>

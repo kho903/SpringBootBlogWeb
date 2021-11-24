@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -42,4 +44,11 @@ public class BlogController {
         return "redirect:/";
     }
 
+    @RequestMapping("/blogMain/{blogId}")
+    public String blogMain(@PathVariable int blogId , HttpSession session, Model model) {
+        UserVO user = (UserVO) session.getAttribute("user");
+        BlogVO blog = blogService.getBlog(user);
+        model.addAttribute("blog", blog);
+        return "blogMain";
+    }
 }
