@@ -18,6 +18,7 @@ public class BlogDAO {
     private ResultSet rs;
 
     private final String INSERT_BLOG = "insert into blog(blog_id, title, tag, cnt_display_post, status, user_id) values(?, ?, ?, ?, ?, ?)";
+    private final String GET_BLOG = "select * from blog where user_id = ?";
 
     public void insertBlog(BlogVO vo, HttpSession session) {
         UserVO user = (UserVO)session.getAttribute("user");
@@ -47,5 +48,30 @@ public class BlogDAO {
                 e.printStackTrace();
             }
         }
+    }
+
+    public BlogVO getBlog(UserVO userVO ) {
+        BlogVO blog = null;
+        try {
+            conn = JDBCUtil.getConnection();
+            stmt = conn.prepareStatement(GET_BLOG);
+            stmt.setInt(1, userVO.getUserId());
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                blog = new BlogVO();
+                blog.setBlogId(rs.getInt("BLOG_ID"));
+                blog.setUserId(rs.getInt("USER_ID"));
+                blog.setStatus(rs.getString("STATUS"));
+                blog.setTag(rs.getString("TAG"));
+                blog.setTitle(rs.getString("TITLE"));
+                blog.setCntDisplayPost(rs.getInt("CNT_DISPLAY_POST"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.close(rs, stmt, conn);
+        }
+        return blog;
     }
 }
