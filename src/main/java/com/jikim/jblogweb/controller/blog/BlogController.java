@@ -3,6 +3,7 @@ package com.jikim.jblogweb.controller.blog;
 
 import com.jikim.jblogweb.biz.blog.BlogService;
 import com.jikim.jblogweb.biz.blog.BlogVO;
+import com.jikim.jblogweb.biz.user.UserService;
 import com.jikim.jblogweb.biz.user.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,9 @@ public class BlogController {
 
     @Autowired
     private BlogService blogService;
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping("/")
     public String index(HttpSession session, Model model) {
@@ -45,8 +49,9 @@ public class BlogController {
     }
 
     @RequestMapping("/blogMain/{blogId}")
-    public String blogMain(@PathVariable int blogId , HttpSession session, Model model) {
-        UserVO user = (UserVO) session.getAttribute("user");
+    public String blogMain(@PathVariable int blogId, HttpSession session, Model model) {
+        UserVO user = new UserVO();
+        user.setUserId(blogId);
         BlogVO blog = blogService.getBlog(user);
         model.addAttribute("blog", blog);
         return "blogMain";
