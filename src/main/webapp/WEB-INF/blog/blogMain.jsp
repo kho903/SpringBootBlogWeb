@@ -8,11 +8,11 @@
     <title>JBlog 홈</title>
 </head>
 <body>
-<div align="center">
-    <h1>${blog.title}</h1>
-    <h3>${blog.tag}</h3>
+<div align="center" style="background-color: deepskyblue; height:20%">
+    <h1 style="color: white">${blog.title}</h1>
+    <h3 style="color: white">${blog.tag}</h3>
 </div>
-<div>
+<div align="center">
     <c:if test="${user == null}">
         <a href="/login"><b>로그인</b></a>
     </c:if>
@@ -24,7 +24,30 @@
     </c:if>
 </div>
 <div>
+        <table border="1">
+            <tr>
+                <th>번호</th>
+                <th>카테고리 아이디</th>
+                <th>카테고리 이름</th>
+                <th>내용</th>
+                <th>만든 날짜</th>
+            </tr>
+            <c:forEach items="${postList}" var="post">
+            <tr>
+                <td>${post.postId}</td>
+                <td>${post.categoryId}</td>
+                <c:forEach items="${categoryList}" var="category">
+                    <c:if test="${category.categoryId eq post.categoryId}">
+                        <td>${category.categoryName}</td>
+                    </c:if>
+                </c:forEach>
+<%--                <td>${post.categoryId}</td>--%>
+                <td>${post.content}</td>
+                <td>${post.createdDate}</td>
+            </tr>
+            </c:forEach>
 
+        </table>
 </div>
 
 </body>

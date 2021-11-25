@@ -3,6 +3,10 @@ package com.jikim.jblogweb.controller.blog;
 
 import com.jikim.jblogweb.biz.blog.BlogService;
 import com.jikim.jblogweb.biz.blog.BlogVO;
+import com.jikim.jblogweb.biz.category.CategoryService;
+import com.jikim.jblogweb.biz.category.CategoryVO;
+import com.jikim.jblogweb.biz.post.PostService;
+import com.jikim.jblogweb.biz.post.PostVO;
 import com.jikim.jblogweb.biz.user.UserService;
 import com.jikim.jblogweb.biz.user.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +29,10 @@ public class BlogController {
     private BlogService blogService;
 
     @Autowired
-    private UserService userService;
+    private PostService postService;
+
+    @Autowired
+    private CategoryService categoryService;
 
     @RequestMapping("/")
     public String index(HttpSession session, Model model) {
@@ -55,7 +62,11 @@ public class BlogController {
         UserVO user = new UserVO();
         user.setUserId(blogId);
         BlogVO blog = blogService.getBlog(user);
+        List<PostVO> postList = postService.getPostList(blog);
+        List<CategoryVO> categoryList = categoryService.getCategoryList(blog);
         model.addAttribute("blog", blog);
+        model.addAttribute("postList", postList);
+        model.addAttribute("categoryList", categoryList);
         return "blogMain";
     }
 

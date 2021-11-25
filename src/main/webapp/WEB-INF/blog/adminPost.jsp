@@ -9,10 +9,6 @@
 </head>
 <body>
 <div align="center">
-    <h1>${blog.title}</h1>
-    <h3>${blog.tag}</h3>
-</div>
-<div>
     <c:if test="${user == null}">
         <a href="/login"><b>로그인</b></a>
     </c:if>
@@ -23,7 +19,7 @@
         <a href="/blogAdmin/${blog.blogId}">블로그 관리</a>
     </c:if>
 </div>
-<div>
+<div align="center">
     <h1>글 작성</h1>
     <form action="/blogAdmin/adminPost" method="post">
     제목 : <input type="text" name="title">

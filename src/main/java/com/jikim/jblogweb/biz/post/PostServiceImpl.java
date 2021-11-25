@@ -1,7 +1,10 @@
 package com.jikim.jblogweb.biz.post;
 
+import com.jikim.jblogweb.biz.blog.BlogVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -27,6 +30,11 @@ public class PostServiceImpl implements PostService {
     @Override
     public void deletePost(PostVO vo) {
         postDAO.deletePost(vo);
+    }
+
+    @Override
+    public List<PostVO> getPostList(BlogVO blogVO) {
+        return postDAO.getPostList(blogVO);
     }
 
 }
