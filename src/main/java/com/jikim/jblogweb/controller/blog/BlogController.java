@@ -40,7 +40,7 @@ public class BlogController {
         if (user != null) {
             BlogVO blog = blogService.getBlog(user);
             if (blog != null)
-                model.addAttribute("blog", blog);
+                session.setAttribute("blog", blog);
         }
         return "forward:index.jsp";
     }
