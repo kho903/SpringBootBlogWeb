@@ -1,5 +1,6 @@
 package com.jikim.jblogweb.biz.category;
 
+import com.jikim.jblogweb.biz.blog.BlogVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<CategoryVO> getCategoryList(CategoryVO vo) {
+    public List<CategoryVO> getCategoryList(BlogVO vo) {
         return categoryDAO.getCategoryList(vo);
     }
 

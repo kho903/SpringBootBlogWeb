@@ -1,5 +1,6 @@
 package com.jikim.jblogweb.biz.category;
 
+import com.jikim.jblogweb.biz.blog.BlogVO;
 import com.jikim.jblogweb.biz.common.JDBCUtil;
 import org.springframework.stereotype.Repository;
 
@@ -48,6 +49,7 @@ public class CategoryDAO {
             conn = JDBCUtil.getConnection();
             stmt = conn.prepareStatement(GET_CATEGORY);
             stmt.setInt(1, vo.getCategoryId());
+            rs = stmt.executeQuery();
             while (rs.next()) {
                 category = new CategoryVO();
                 category.setCategoryId(vo.getCategoryId());
@@ -67,23 +69,24 @@ public class CategoryDAO {
         return category;
     }
 
-    public List<CategoryVO> getCategoryList(CategoryVO vo) {
+    public List<CategoryVO> getCategoryList(BlogVO vo) {
         List<CategoryVO> categoryList = new ArrayList<>();
         CategoryVO category = null;
         try {
             conn = JDBCUtil.getConnection();
             stmt = conn.prepareStatement(GET_CATEGORY_LIST);
-            stmt.setInt(1, vo.getCategoryId());
+            stmt.setInt(1, vo.getBlogId());
+            rs = stmt.executeQuery();
             while (rs.next()) {
                 category = new CategoryVO();
-                category.setCategoryId(vo.getCategoryId());
-                category.setCategoryName(vo.getCategoryName());
-                category.setBlogId(vo.getBlogId());
-                category.setCntDisplayPost(vo.getCntDisplayPost());
-                category.setDescription(vo.getDescription());
-                category.setDisplayType(vo.getDisplayType());
-                category.setCreatedDate(vo.getCreatedDate());
-                category.setModifiedDate(vo.getModifiedDate());
+                category.setCategoryId(rs.getInt("CATEGORY_ID"));
+                category.setCategoryName(rs.getString("CATEGORY_NAME"));
+                category.setBlogId(rs.getInt("BLOG_ID"));
+                category.setCntDisplayPost(rs.getInt("CNT_DISPLAY_POST"));
+                category.setDescription(rs.getString("DESCRIPTION"));
+                category.setDisplayType(rs.getString("DISPLAY_TYPE"));
+                category.setCreatedDate(rs.getDate("CREATED_DATE"));
+                category.setModifiedDate(rs.getDate("MODIFIED_DATE"));
                 categoryList.add(category);
             }
         } catch (Exception e) {
@@ -102,7 +105,7 @@ public class CategoryDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            JDBCUtil.close(rs, stmt, conn);
+            JDBCUtil.close(stmt, conn);
         }
     }
 
@@ -114,11 +117,11 @@ public class CategoryDAO {
             stmt.setString(2, vo.getDisplayType());
             stmt.setString(3, vo.getDescription());
             stmt.setString(4, vo.getCategoryName());
-            rs = stmt.executeQuery();
+            stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            JDBCUtil.close(rs, stmt, conn);
+            JDBCUtil.close(stmt, conn);
         }
     }
 

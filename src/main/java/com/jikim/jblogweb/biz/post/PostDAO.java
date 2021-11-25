@@ -15,7 +15,7 @@ public class PostDAO {
     private ResultSet rs;
 
     private final String INSERT_POST = "insert into post(post_id, category_id, title, content, created_date) " +
-            "values(nvl(max(post_id), 0) + 1, ?, ?, ?, now())";
+            "values((select nvl(max(post_id), 0) +1 from post), ?, ?, ?, now())";
     private final String GET_POST = "select * from post where post_id = ?";
     private final String GET_POST_LIST = "";
     private final String UPDATE_POST = "update post set category_id = ?, title = ?, content = ? where post_id = ?";
@@ -28,12 +28,11 @@ public class PostDAO {
             stmt.setInt(1, vo.getCategoryId());
             stmt.setString(2, vo.getTitle());
             stmt.setString(3, vo.getContent());
-            rs = stmt.executeQuery();
-
+            stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            JDBCUtil.close(rs, stmt, conn);
+            JDBCUtil.close(stmt, conn);
         }
     }
 
@@ -69,12 +68,11 @@ public class PostDAO {
             stmt.setString(2, vo.getTitle());
             stmt.setString(3, vo.getContent());
             stmt.setInt(4, vo.getPostId());
-            rs = stmt.executeQuery();
-
+            stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            JDBCUtil.close(rs, stmt, conn);
+            JDBCUtil.close(stmt, conn);
         }
     }
 

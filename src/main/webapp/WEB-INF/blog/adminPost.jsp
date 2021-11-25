@@ -25,9 +25,16 @@
 </div>
 <div>
     <h1>글 작성</h1>
-    <form action="">
-    제목 : <input type="text">
-    내용 : <input type="text">
+    <form action="/blogAdmin/adminPost" method="post">
+    제목 : <input type="text" name="title">
+    카테고리 : <select name="categoryId">
+                <c:forEach items="${categoryList}" var="category">
+                    <option value="${category.categoryId}">
+                        ${category.categoryName}
+                    </option>
+                </c:forEach>
+             </select>
+    내용 : <input type="text" name="content">
         <input type="submit">
     </form>
 </div>
