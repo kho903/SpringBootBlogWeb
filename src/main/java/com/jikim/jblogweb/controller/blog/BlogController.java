@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class BlogController {
@@ -55,5 +56,13 @@ public class BlogController {
         BlogVO blog = blogService.getBlog(user);
         model.addAttribute("blog", blog);
         return "blogMain";
+    }
+
+    @RequestMapping("/search")
+    public String search(BlogVO blogVO, Model model) {
+        List<BlogVO> searchResult = null;
+        searchResult = blogService.getBlogList(blogVO);
+        model.addAttribute("searchResult", searchResult);
+        return "forward:index.jsp";
     }
 }

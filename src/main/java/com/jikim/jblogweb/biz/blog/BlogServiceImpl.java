@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Service
 public class BlogServiceImpl implements BlogService {
@@ -26,6 +27,11 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public BlogVO getBlog(UserVO vo) {
         return blogDAO.getBlog(vo);
+    }
+
+    @Override
+    public List<BlogVO> getBlogList(BlogVO vo) {
+        return blogDAO.getBlogList(vo);
     }
 
 }

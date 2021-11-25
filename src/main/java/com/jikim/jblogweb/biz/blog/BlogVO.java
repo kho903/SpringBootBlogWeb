@@ -10,4 +10,7 @@ public class BlogVO {
     private int cntDisplayPost = 0;
     private String status;
     private int userId;
+
+    private String searchCondition;
+    private String searchKeyword;
 }
