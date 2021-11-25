@@ -17,7 +17,7 @@ public class CategoryDAO {
 
     private String INSERT_CATEGORY = "insert into category" +
             "(category_id, blog_id, category_name, display_type, cnt_display_post, description, created_date, modified_date)" +
-            "values (select nvl(max(category_id), 0) + 1 from CATEGORY), ?, ?, ?, ?, ?, now(), now()";
+            "values(nvl(max(category_id), 0) + 1, ?, ?, ?, ?, ?, now(), now()";
     private String GET_CATEGORY = "select * from category where category_id = ?";
     private String GET_CATEGORY_LIST = "select * from category where blog_id = ?";
     private String DELETE_CATEGORY = "delete from category where category_id = ?";

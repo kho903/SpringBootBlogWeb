@@ -51,4 +51,11 @@ public class UserController {
         // 인덱스 페이지로 이동한다.
         return "redirect:/";
     }
+
+    @RequestMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        // 인덱스 페이지로 이동한다.
+        return "redirect:/";
+    }
 }

@@ -43,14 +43,15 @@ public class BlogController {
         return "blogcreate";
     }
 
-    @PostMapping("/blogcreate")
-    public String blogcreate(BlogVO vo, HttpServletRequest request) {
-        blogService.insertBlog(vo, request);
+    @PostMapping("/blogCreate")
+    public String blogcreate(BlogVO BlogVo, HttpSession session) {
+        UserVO user = (UserVO) session.getAttribute("user");
+        blogService.insertBlog(BlogVo, user);
         return "redirect:/";
     }
 
     @RequestMapping("/blogMain/{blogId}")
-    public String blogMain(@PathVariable int blogId, HttpSession session, Model model) {
+    public String blogMain(@PathVariable int blogId, Model model) {
         UserVO user = new UserVO();
         user.setUserId(blogId);
         BlogVO blog = blogService.getBlog(user);
@@ -60,8 +61,7 @@ public class BlogController {
 
     @RequestMapping("/search")
     public String search(BlogVO blogVO, Model model) {
-        List<BlogVO> searchResult = null;
-        searchResult = blogService.getBlogList(blogVO);
+        List<BlogVO> searchResult = blogService.getBlogList(blogVO);
         model.addAttribute("searchResult", searchResult);
         return "forward:index.jsp";
     }

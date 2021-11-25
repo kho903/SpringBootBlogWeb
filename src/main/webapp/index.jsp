@@ -31,12 +31,13 @@
                         <c:if test="${blog != null}">
                             <a href="/blogMain/${blog.blogId}"><b>내 블로그로 가기</b></a>
                         </c:if>
+                        <a href="/logout"><b>로그아웃</b></a>
                     </c:if>
                 </td>
             </tr>
             <tr>
                 <td width="40%" height="20">&nbsp;</td>
-                <td width="60%"><input type="text" name="searchKeyword" size="65"><input type="submit" value="검색"></td>
+                <td width="60%"><input type="text" name="searchKeyword" size="30"><input type="submit" value="검색"></td>
             </tr>
             <tr>
                 <td height="20" colspan="10" align="center" class="tdcontent">
@@ -47,6 +48,7 @@
             </tr>
         </table>
     </form>
+
     <c:if test="${searchResult != null}">
     <table width="720" height="100" border="1" cellpadding="0" cellspacing="0">
         <tr>
