@@ -19,6 +19,7 @@ public class BlogDAO {
     private ResultSet rs;
 
     private final String INSERT_BLOG = "insert into blog(blog_id, title, tag, cnt_display_post, status, user_id) values(?, ?, ?, ?, ?, ?)";
+    private final String UPDATE_BLOG = "update blog set title = ?, tag = ? where blog_id = ?";
     private final String GET_BLOG = "select * from blog where user_id = ?";
     private final String GET_BLOG_LIST_TITLE = "select * from blog where title ilike ?";
     private final String GET_BLOG_LIST_TAG = "select * from blog where tag ilike ?";
@@ -34,6 +35,31 @@ public class BlogDAO {
             stmt.setInt(4, 0);
             stmt.setString(5, "PUBLIC");
             stmt.setInt(6, userVO.getUserId());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void updateBlog(BlogVO blogVO, UserVO userVO) {
+        try {
+            conn = JDBCUtil.getConnection();
+            stmt = conn.prepareStatement(UPDATE_BLOG);
+            stmt.setString(1, blogVO.getTitle());
+            stmt.setString(2, blogVO.getTag());
+            stmt.setInt(3, blogVO.getBlogId());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

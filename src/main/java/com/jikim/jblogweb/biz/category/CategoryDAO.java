@@ -15,9 +15,9 @@ public class CategoryDAO {
     private PreparedStatement stmt;
     private ResultSet rs;
 
-    private String INSERT_CATEGORY = "insert into category" +
-            "(category_id, blog_id, category_name, display_type, cnt_display_post, description, created_date, modified_date)" +
-            "values(nvl(max(category_id), 0) + 1, ?, ?, ?, ?, ?, now(), now()";
+    private String INSERT_CATEGORY = "insert into CATEGORY" +
+            "(BLOG_ID, CATEGORY_ID , CATEGORY_NAME, DISPLAY_TYPE, CNT_DISPLAY_POST, DESCRIPTION, CREATED_DATE, MODIFIED_DATE) " +
+            "values(?, (select nvl(max(CATEGORY_ID), 0) +1 from CATEGORY), ?, ?, ?, ?, now(), now())";
     private String GET_CATEGORY = "select * from category where category_id = ?";
     private String GET_CATEGORY_LIST = "select * from category where blog_id = ?";
     private String DELETE_CATEGORY = "delete from category where category_id = ?";
@@ -33,12 +33,12 @@ public class CategoryDAO {
             stmt.setString(3, vo.getDisplayType());
             stmt.setInt(4, vo.getCntDisplayPost());
             stmt.setString(5, vo.getDescription());
-            rs = stmt.executeQuery();
+            stmt.executeUpdate();
 
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            JDBCUtil.close(rs, stmt, conn);
+            JDBCUtil.close(stmt, conn);
         }
     }
 

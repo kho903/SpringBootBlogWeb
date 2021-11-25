@@ -27,4 +27,9 @@ public class BlogServiceImpl implements BlogService {
         return blogDAO.getBlogList(vo);
     }
 
+    @Override
+    public void updateBlog(BlogVO blogVO, UserVO userVO) {
+        blogDAO.updateBlog(blogVO, userVO);
+    }
+
 }

@@ -44,9 +44,9 @@ public class BlogController {
     }
 
     @PostMapping("/blogCreate")
-    public String blogcreate(BlogVO BlogVo, HttpSession session) {
+    public String blogcreate(BlogVO blogVo, HttpSession session) {
         UserVO user = (UserVO) session.getAttribute("user");
-        blogService.insertBlog(BlogVo, user);
+        blogService.insertBlog(blogVo, user);
         return "redirect:/";
     }
 
@@ -65,4 +65,22 @@ public class BlogController {
         model.addAttribute("searchResult", searchResult);
         return "forward:index.jsp";
     }
+
+    @GetMapping("/blogAdmin/{blogId}")
+    public String blogAdminView(@PathVariable int blogId, Model model) {
+        UserVO user = new UserVO();
+        user.setUserId(blogId);
+        BlogVO blog = blogService.getBlog(user);
+        model.addAttribute("blog", blog);
+        return "blogadmin_basic";
+    }
+
+    @PostMapping("/blogAdmin/{blogId}")
+    public String blogAdmin(@PathVariable int blogId, BlogVO blogVO, HttpSession session) {
+        blogVO.setBlogId(blogId);
+        UserVO user = (UserVO) session.getAttribute("user");
+        blogService.updateBlog(blogVO, user);
+        return "redirect:/blogMain/" + blogId;
+    }
+
 }

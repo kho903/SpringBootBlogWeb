@@ -24,7 +24,12 @@
     </c:if>
 </div>
 <div>
-
+    <h1>글 작성</h1>
+    <form action="">
+    제목 : <input type="text">
+    내용 : <input type="text">
+        <input type="submit">
+    </form>
 </div>
 
 </body>

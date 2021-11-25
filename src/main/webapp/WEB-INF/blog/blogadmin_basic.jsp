@@ -22,9 +22,20 @@
     <c:if test="${blog.userId == user.userId}">
         <a href="/blogAdmin/${blog.blogId}">블로그 관리</a>
     </c:if>
+    <a href="/blogMain/${blog.blogId}">블로그 메인</a>
 </div>
 <div>
-
+    <a href="">기본설정</a>
+    <a href="adminCategory/${blog.blogId}">카테고리</a>
+    <a href="adminPost">글작성</a>
+</div>
+<div>
+    <form action="/blogAdmin/${blog.blogId}" method="post">
+        블로그 제목 : <input type="text" name="title" /> <br>
+        블로그 태그 : <input type="text" name="tag" />
+        <input type="submit" value="확인">
+    </form>
+    <a href="/">인덱스 페이지로 이동</a>
 </div>
 
 </body>

@@ -10,4 +10,6 @@ public interface BlogService {
     BlogVO getBlog(UserVO vo);
 
     List<BlogVO> getBlogList(BlogVO vo);
+
+    void updateBlog(BlogVO blogVO, UserVO userVO);
 }
