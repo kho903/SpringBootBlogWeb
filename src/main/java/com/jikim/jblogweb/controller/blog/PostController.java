@@ -45,11 +45,12 @@ public class PostController {
     }
 
     @GetMapping("/blogAdmin/updatePost/{postId}")
-    public String updatePostView(@PathVariable String postId, Model model, HttpSession session) {
+    public String updatePostView(@PathVariable String postId,PostVO postVO, Model model, HttpSession session) {
         UserVO user = (UserVO) session.getAttribute("user");
         BlogVO blog = blogService.getBlog(user);
+        PostVO post = postService.getPost(postVO);
         model.addAttribute("categoryList", categoryService.getCategoryList(blog));
-        model.addAttribute("editPostId", postId);
+        model.addAttribute("post", post);
         return "adminPost";
     }
 

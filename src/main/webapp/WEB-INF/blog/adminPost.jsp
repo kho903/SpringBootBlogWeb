@@ -22,14 +22,18 @@
 <div align="center">
     <h1>글 작성</h1>
     <form
-            <c:if test="${editPostId == null}">
+            <c:if test="${post == null}">
                 action="/blogAdmin/adminPost"
             </c:if>
-            <c:if test="${editPostId != null}">
-                action="/blogAdmin/updatePost/${editPostId}"
+            <c:if test="${post != null}">
+                action="/blogAdmin/updatePost/${post.postId}"
             </c:if>
             method="post">
-    제목 : <input type="text" name="title" style="width: 50%;">
+    제목 : <input type="text" name="title" style="width: 50%;"
+            <c:if test="${post != null}">
+                        value="${post.title}"
+            </c:if>
+    >
     <select name="categoryId">
         <c:forEach items="${categoryList}" var="category">
             <option value="${category.categoryId}">
@@ -37,7 +41,11 @@
             </option>
         </c:forEach>
     </select><br>
-    내용 : <input type="text" name="content" style="width: 60%; height: 30%"><br>
+    내용 : <input type="text" name="content" style="width: 60%; height: 30%"
+            <c:if test="${post != null}">
+            value="${post.content}"
+            </c:if>
+    ><br>
         <input type="submit">
     </form>
 </div>
