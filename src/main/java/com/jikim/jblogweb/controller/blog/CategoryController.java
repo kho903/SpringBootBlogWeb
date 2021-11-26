@@ -1,14 +1,19 @@
 package com.jikim.jblogweb.controller.blog;
 
 import com.jikim.jblogweb.biz.blog.BlogService;
+import com.jikim.jblogweb.biz.blog.BlogVO;
 import com.jikim.jblogweb.biz.category.CategoryService;
 import com.jikim.jblogweb.biz.category.CategoryVO;
+import com.jikim.jblogweb.biz.user.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class CategoryController {
@@ -20,7 +25,11 @@ public class CategoryController {
     private BlogService blogService;
 
     @GetMapping("/blogAdmin/adminCategory/{blogId}")
-    public String blogAdminCategoryView(@PathVariable int blogId) {
+    public String blogAdminCategoryView(@PathVariable int blogId, Model model, HttpSession session) {
+        UserVO user = (UserVO) session.getAttribute("user");
+        BlogVO blog = blogService.getBlog(user);
+        List<CategoryVO> categoryList = categoryService.getCategoryList(blog);
+        model.addAttribute("categoryList", categoryList);
         return "blogadmin_category";
     }
 

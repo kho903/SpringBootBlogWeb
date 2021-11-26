@@ -8,6 +8,11 @@
     <title>포스트 생성</title>
 </head>
 <body>
+<div align="center" style="background-color: deepskyblue; height:20%">
+    <br>
+    <h1 style="color: white">${blog.title}</h1>
+    <h3 style="color: white">${blog.tag}</h3>
+</div>
 <div align="center">
     <c:if test="${user == null}">
         <a href="/login"><b>로그인</b></a>
