@@ -43,4 +43,21 @@ public class PostController {
         postService.insertPost(postVO);
         return "redirect:/blogMain/" + blogId;
     }
+
+    @GetMapping("/blogAdmin/updatePost/{postId}")
+    public String updatePostView(@PathVariable String postId, Model model, HttpSession session) {
+        UserVO user = (UserVO) session.getAttribute("user");
+        BlogVO blog = blogService.getBlog(user);
+        model.addAttribute("categoryList", categoryService.getCategoryList(blog));
+        model.addAttribute("editPostId", postId);
+        return "adminPost";
+    }
+
+    @PostMapping("/blogAdmin/updatePost/{postId}")
+    public String updatePost(@PathVariable int postId, PostVO postVO, HttpSession session) {
+        UserVO user = (UserVO) session.getAttribute("user");
+        String blogId = String.valueOf(blogService.getBlog(user).getBlogId());
+        postService.updatePost(postVO);
+        return "redirect:/blogMain/" + blogId;
+    }
 }

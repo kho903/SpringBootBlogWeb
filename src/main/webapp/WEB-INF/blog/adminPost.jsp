@@ -21,7 +21,14 @@
 </div>
 <div align="center">
     <h1>글 작성</h1>
-    <form action="/blogAdmin/adminPost" method="post">
+    <form
+            <c:if test="${editPostId == null}">
+                action="/blogAdmin/adminPost"
+            </c:if>
+            <c:if test="${editPostId != null}">
+                action="/blogAdmin/updatePost/${editPostId}"
+            </c:if>
+            method="post">
     제목 : <input type="text" name="title" style="width: 50%;">
     <select name="categoryId">
         <c:forEach items="${categoryList}" var="category">

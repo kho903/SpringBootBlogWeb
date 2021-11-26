@@ -21,8 +21,11 @@
                 <tr>
                     <th>번호</th>
                     <th>카테고리 이름</th>
+                    <th>제목</th>
                     <th>내용</th>
                     <th>만든 날짜</th>
+                    <th>수정</th>
+                    <th>삭제</th>
                 </tr>
                 <c:forEach items="${postList}" var="post">
                     <tr>
@@ -32,8 +35,11 @@
                                 <td>${category.categoryName}</td>
                             </c:if>
                         </c:forEach>
+                        <td>${post.title}</td>
                         <td>${post.content}</td>
                         <td>${post.createdDate}</td>
+                        <td><a href="/blogAdmin/updatePost/${post.postId}">수정</a></td>
+                        <td><a href="">삭제</a></td>
                     </tr>
                 </c:forEach>
 
