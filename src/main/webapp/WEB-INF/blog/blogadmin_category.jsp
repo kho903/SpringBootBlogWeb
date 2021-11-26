@@ -24,8 +24,8 @@
     <form action="/blogAdmin/adminCategory/${blogId}" method="post">
         <input value="${blogId}" name="blogId" hidden>
         카테고리 명 : <input type="text" name="categoryName" /> <br>
-        보이기 유형 : <input type="radio" name="displayType" value="titleOnly" checked="checked">제목
-        <input type="radio"	name="displayType" value="titleCont">제목 + 내용
+        보이기 유형 : <input type="radio" name="displayType" value="제목" checked="checked">제목
+        <input type="radio"	name="displayType" value="제목 + 내용">제목 + 내용
         포스트 수 : <input type="text" name="cntDisplayPost" />
         설명 : <input type="text" name="description" />
         <input type="submit" value="확인">

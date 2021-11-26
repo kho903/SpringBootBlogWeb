@@ -22,15 +22,15 @@
 <div align="center">
     <h1>글 작성</h1>
     <form action="/blogAdmin/adminPost" method="post">
-    제목 : <input type="text" name="title">
-    카테고리 : <select name="categoryId">
-                <c:forEach items="${categoryList}" var="category">
-                    <option value="${category.categoryId}">
-                        ${category.categoryName}
-                    </option>
-                </c:forEach>
-             </select>
-    내용 : <input type="text" name="content">
+    제목 : <input type="text" name="title" style="width: 50%;">
+    <select name="categoryId">
+        <c:forEach items="${categoryList}" var="category">
+            <option value="${category.categoryId}">
+                ${category.categoryName}
+            </option>
+        </c:forEach>
+    </select><br>
+    내용 : <input type="text" name="content" style="width: 60%; height: 30%"><br>
         <input type="submit">
     </form>
 </div>
