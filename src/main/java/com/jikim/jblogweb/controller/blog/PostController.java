@@ -60,4 +60,12 @@ public class PostController {
         postService.updatePost(postVO);
         return "redirect:/blogMain/" + blogId;
     }
+
+    @RequestMapping("/blogAdmin/deletePost/{postId}")
+    public String deletePost(@PathVariable int postId, PostVO postVO, HttpSession session) {
+        UserVO user = (UserVO) session.getAttribute("user");
+        String blogId = String.valueOf(blogService.getBlog(user).getBlogId());
+        postService.deletePost(postVO);
+        return "redirect:/blogMain/" + blogId;
+    }
 }

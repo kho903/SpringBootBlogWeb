@@ -111,11 +111,11 @@ public class PostDAO {
             conn = JDBCUtil.getConnection();
             stmt = conn.prepareStatement(DELETE_POST);
             stmt.setInt(1, vo.getPostId());
-            rs = stmt.executeQuery();
+            stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            JDBCUtil.close(rs, stmt, conn);
+            JDBCUtil.close(stmt, conn);
         }
     }
 }

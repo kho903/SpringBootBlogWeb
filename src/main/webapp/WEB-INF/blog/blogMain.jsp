@@ -19,7 +19,6 @@
         <div style="width: 70%; float: left">
             <table border="1" width="80%">
                 <tr>
-                    <th>번호</th>
                     <th>카테고리 이름</th>
                     <th>제목</th>
                     <th>내용</th>
@@ -29,7 +28,6 @@
                 </tr>
                 <c:forEach items="${postList}" var="post">
                     <tr>
-                        <td>${post.postId}</td>
                         <c:forEach items="${categoryList}" var="category">
                             <c:if test="${category.categoryId eq post.categoryId}">
                                 <td>${category.categoryName}</td>
@@ -39,7 +37,7 @@
                         <td>${post.content}</td>
                         <td>${post.createdDate}</td>
                         <td><a href="/blogAdmin/updatePost/${post.postId}">수정</a></td>
-                        <td><a href="">삭제</a></td>
+                        <td><a href="/blogAdmin/deletePost/${post.postId}">삭제</a></td>
                     </tr>
                 </c:forEach>
 
