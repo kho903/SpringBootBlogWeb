@@ -37,6 +37,7 @@
                     <th>포스트 수</th>
                     <th>설명</th>
                     <th>만든 날짜</th>
+                    <th>삭제</th>
                 </tr>
             <c:forEach items="${categoryList}" var="category">
                 <tr align="center">
@@ -45,6 +46,7 @@
                     <td>${category.cntDisplayPost}</td>
                     <td>${category.description}</td>
                     <td>${category.modifiedDate}</td>
+                    <td><a href="/blogAdmin/deleteCategory/${blog.blogId}/${category.categoryId}">삭제</a> </td>
                 </tr>
             </c:forEach>
         </table>
@@ -54,8 +56,8 @@
         <input value="${blogId}" name="blogId" hidden>
         카테고리 명 : <input type="text" name="categoryName" /> <br>
         보이기 유형 : <input type="radio" name="displayType" value="제목" checked="checked">제목
-        <input type="radio"	name="displayType" value="제목 + 내용">제목 + 내용
-        포스트 수 : <input type="text" name="cntDisplayPost" />
+        <input type="radio"	name="displayType" value="제목 + 내용">제목 + 내용<br>
+        포스트 수 : <input type="text" name="cntDisplayPost" /><br>
         설명 : <input type="text" name="description" />
         <input type="submit" value="확인">
     </form>

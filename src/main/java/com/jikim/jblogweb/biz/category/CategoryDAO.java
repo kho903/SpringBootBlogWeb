@@ -52,14 +52,14 @@ public class CategoryDAO {
             rs = stmt.executeQuery();
             while (rs.next()) {
                 category = new CategoryVO();
-                category.setCategoryId(vo.getCategoryId());
-                category.setCategoryName(vo.getCategoryName());
-                category.setBlogId(vo.getBlogId());
-                category.setCntDisplayPost(vo.getCntDisplayPost());
-                category.setDescription(vo.getDescription());
-                category.setDisplayType(vo.getDisplayType());
-                category.setCreatedDate(vo.getCreatedDate());
-                category.setModifiedDate(vo.getModifiedDate());
+                category.setCategoryId(rs.getInt("CATEGORY_ID"));
+                category.setCategoryName(rs.getString("CATEGORY_NAME"));
+                category.setBlogId(rs.getInt("BLOG_ID"));
+                category.setCntDisplayPost(rs.getInt("CNT_DISPLAY_POST"));
+                category.setDescription(rs.getString("DESCRIPTION"));
+                category.setDisplayType(rs.getString("DISPLAY_TYPE"));
+                category.setCreatedDate(rs.getDate("CREATED_DATE"));
+                category.setModifiedDate(rs.getDate("MODIFIED_DATE"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -102,6 +102,7 @@ public class CategoryDAO {
             conn = JDBCUtil.getConnection();
             stmt = conn.prepareStatement(DELETE_CATEGORY);
             stmt.setInt(1, vo.getCategoryId());
+            stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
