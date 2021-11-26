@@ -62,18 +62,21 @@
         <c:forEach var="res" items="${searchResult}">
 
         <tr>
-            <td class="tablecontent" align="center">${res.title}</td>
+            <td class="tablecontent" align="center">
+                <a href="/blogMain/${res.blogId}">
+                    ${res.title}
+                </a>
+            </td>
 
-            <c:forEach items="${userList}" var="usera">
-                <c:if test="${usera.userId == res.userId}">
-                    <td class="tablecontent" align="center">${usera.id}</td>
+            <c:forEach items="${userList}" var="user">
+                <c:if test="${user.userId == res.userId}">
+                    <td class="tablecontent" align="center">${user.id}</td>
                 </c:if>
             </c:forEach>
             <td class="tablecontent" align="center">${res.tag}</td>
             <td class="tablecontent" align="center">${res.status}</td>
         </tr>
         </c:forEach>
-
     </table>
     </c:if>
 </center>

@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>JBlog 홈</title>
+    <title>${blog.title}</title>
 </head>
 <body>
 <div align="center" style="background-color: deepskyblue; height:20%">
