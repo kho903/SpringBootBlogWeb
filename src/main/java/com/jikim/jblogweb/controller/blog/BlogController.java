@@ -7,6 +7,7 @@ import com.jikim.jblogweb.biz.category.CategoryService;
 import com.jikim.jblogweb.biz.category.CategoryVO;
 import com.jikim.jblogweb.biz.post.PostService;
 import com.jikim.jblogweb.biz.post.PostVO;
+import com.jikim.jblogweb.biz.user.UserService;
 import com.jikim.jblogweb.biz.user.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +32,9 @@ public class BlogController {
 
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping("/")
     public String index(HttpSession session, Model model) {
@@ -80,7 +84,9 @@ public class BlogController {
     @RequestMapping("/search")
     public String search(BlogVO blogVO, Model model) {
         List<BlogVO> searchResult = blogService.getBlogList(blogVO);
+        List<UserVO> userList = userService.getUserList();
         model.addAttribute("searchResult", searchResult);
+        model.addAttribute("userList", userList);
         return "forward:index.jsp";
     }
 

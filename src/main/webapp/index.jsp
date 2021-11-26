@@ -63,16 +63,14 @@
 
         <tr>
             <td class="tablecontent" align="center">${res.title}</td>
-            <td class="tablecontent" align="center">${res.userId}</td>
+
+            <c:forEach items="${userList}" var="usera">
+                <c:if test="${usera.userId == res.userId}">
+                    <td class="tablecontent" align="center">${usera.id}</td>
+                </c:if>
+            </c:forEach>
             <td class="tablecontent" align="center">${res.tag}</td>
             <td class="tablecontent" align="center">${res.status}</td>
-<%--            <td class="tablecontent">&nbsp;&nbsp;&nbsp;<a href="#">Gurum의 블로그</a></td>--%>
-<%--            <td class="tablecontent" align="center">채규태</td>--%>
-<%--            <td class="tablecontent" align="center"><img height="32" src="images/j2eelogo.jpg" border="0"></td>--%>
-<%--            <td class="tablecontent" align="center">운영</td>--%>
-<%--            <td class="tablecontent" align="center">--%>
-<%--                <a href="#"><img height="9"	src="images/delete.jpg" border="0"></a>--%>
-<%--            </td>--%>
         </tr>
         </c:forEach>
 
