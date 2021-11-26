@@ -9,7 +9,7 @@
 <body>
 <center>
     <a href="/"><img src="images/logo.jpg"/></a>
-    <form action="blogcreate" method="post">
+    <form action="blogCreate" method="post">
         블로그 제목 : <input type="text" name="title" /> <br>
         블로그 태그 : <input type="text" name="tag" />
         <input type="submit" value="블로그 생성">
