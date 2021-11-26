@@ -19,12 +19,14 @@
         <div style="width: 70%; float: left">
             <table border="1" width="80%">
                 <tr>
-                    <th>카테고리 이름</th>
+                    <th>카테고리</th>
                     <th>제목</th>
                     <th>내용</th>
                     <th>만든 날짜</th>
+                    <c:if test="${blog.userId eq user.userId}">
                     <th>수정</th>
                     <th>삭제</th>
+                    </c:if>
                 </tr>
                 <c:forEach items="${postList}" var="post">
                     <tr>
@@ -36,8 +38,10 @@
                         <td>${post.title}</td>
                         <td>${post.content}</td>
                         <td>${post.createdDate}</td>
+                        <c:if test="${blog.userId eq user.userId}">
                         <td><a href="/blogAdmin/updatePost/${post.postId}">수정</a></td>
                         <td><a href="/blogAdmin/deletePost/${post.postId}">삭제</a></td>
+                        </c:if>
                     </tr>
                 </c:forEach>
 
